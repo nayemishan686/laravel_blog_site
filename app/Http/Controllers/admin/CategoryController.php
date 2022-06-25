@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\category;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 
 class CategoryController extends Controller
@@ -89,7 +90,16 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category= category::find($id);
+        $validated = $request->validate([
+            'category_name' => 'required|unique:categories,category_name|max:255',
+        ]);
+        $category->update([
+            'category_name' => $request->category_name,
+            'category_slug' => Str::of($request->category_name)->slug('-'),
+        ]);
+        return redirect()->back()->with('success','Category Added Successfully');
+        
     }
 
     /**
@@ -100,6 +110,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('categories')->where('id',$id)->delete();
+        return redirect()->route('category.index');
     }
 }

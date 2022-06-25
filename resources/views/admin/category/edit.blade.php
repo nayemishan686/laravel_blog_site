@@ -16,8 +16,9 @@
                         @if (session()->has('error'))
                             <strong class="text-danger">{{ session()->get('error') }}</strong>
                         @endif
-                        <form action="" method="POST">
+                        <form action="{{ route('category.update',$category->id) }}" method="POST">
                             @csrf
+                            <input type="hidden" name="_method" value="PUT">
                             <div>
                                 <label for="category_name">Category Name:</label>
                                 <input type="text" name="category_name" placeholder="Category Name"

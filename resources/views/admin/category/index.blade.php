@@ -27,14 +27,24 @@
                                     <td>{{$cat_item->category_name}}</td>
                                     <td>{{$cat_item->category_slug}}</td>
                                     <td>
-                                        <a href="{{route('category.edit',$cat_item->id)}}" class="btn btn-primary">Edit</a>
-                                        <a href="" class="btn btn-danger">Delete</a>
+                                        <a href="{{route('category.edit',$cat_item->id)}}" class="btn btn-primary float-start">Edit</a>
+                                        <div class="forms" style="display: inline;">
+                                            <form action="{{route('category.destroy',$cat_item->id)}}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <input type="submit" value="Delete" class="btn btn-danger">
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-                   
+                    {{-- <form action="{{route('students.destroy',$sData->id)}}" method="POST">
+                        @csrf
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="submit" value="Delete" class="btn btn-danger">
+                    </form> --}}
                 </div>
             </div>
         </div>

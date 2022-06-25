@@ -22,7 +22,7 @@ Route::get('/', function () {
 Auth::routes();
 
 // Category CRUD
-Route::resource('category',App\Http\Controllers\admin\CategoryController::class);
+Route::resource('category',App\Http\Controllers\admin\CategoryController::class)->middleware(['verified']);;
 
 
 
