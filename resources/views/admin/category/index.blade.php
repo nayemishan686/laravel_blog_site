@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('All Category') }}
-                    <a href="" class="btn btn-info float-end">Add Category</a>
+                    <a href="{{route('category.create')}}" class="btn btn-info float-end">Add Category</a>
                 </div>
 
                 <div class="card-body">

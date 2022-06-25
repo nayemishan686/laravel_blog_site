@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\category;
+use Illuminate\Support\Str;
+
 
 class CategoryController extends Controller
 {
@@ -26,7 +28,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.category.create');
     }
 
     /**
@@ -37,7 +39,22 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'category_name' => 'required|unique:categories,category_name|max:255',
+        ]);
+
+        // $category = new category;
+        // $category->category_name = $request->category_name;
+        // $category->category_slug = Str::of($request->category_name)->slug('-');
+        // $category->save();
+        // return redirect()->back()->with('success','Category Added Successfully');
+
+        // another way
+        category::insert([
+            'category_name' => $request->category_name,
+            'category_slug' => Str::of($request->category_name)->slug('-'),
+        ]);
+        return redirect()->back()->with('success','Category Added Successfully');
     }
 
     /**
