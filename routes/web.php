@@ -21,6 +21,21 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// Category CRUD
+Route::resource('category',App\Http\Controllers\admin\CategoryController::class);
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Verification email
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
