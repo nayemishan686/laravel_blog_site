@@ -27,7 +27,7 @@
                                     <td>{{$cat_item->category_name}}</td>
                                     <td>{{$cat_item->category_slug}}</td>
                                     <td>
-                                        <a href="" class="btn btn-primary">Edit</a>
+                                        <a href="{{route('category.edit',$cat_item->id)}}" class="btn btn-primary">Edit</a>
                                         <a href="" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
