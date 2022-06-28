@@ -54,7 +54,7 @@
                                                             method="POST">
                                                             @csrf
                                                             <input type="hidden" name="_method" value="DELETE">
-                                                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                                            <button type="submit" class="btn btn-danger show_confirm" data-toggle="tooltip" title='Delete'><i class="fa fa-trash"></i></button>
                                                         </form>
                                                     </div>
                                                 </td>

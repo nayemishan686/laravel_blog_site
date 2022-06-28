@@ -55,7 +55,8 @@ class CategoryController extends Controller
             'category_name' => $request->category_name,
             'category_slug' => Str::of($request->category_name)->slug('-'),
         ]);
-        return redirect()->back()->with('success','Category Added Successfully');
+        $notification = array('message' => 'Category Inserted Successfully', 'alert-type' => 'success'); 
+        return redirect()->back()->with($notification);
     }
 
     /**
@@ -98,7 +99,8 @@ class CategoryController extends Controller
             'category_name' => $request->category_name,
             'category_slug' => Str::of($request->category_name)->slug('-'),
         ]);
-        return redirect()->back()->with('success','Category Added Successfully');
+        $notification = array('message' => 'Category Updated Successfully', 'alert-type' => 'success'); 
+        return redirect()->back()->with($notification);
         
     }
 
