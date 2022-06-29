@@ -18,8 +18,11 @@ class SubCategoryController extends Controller
      */
     public function index()
     {   
+        // $data = DB::table('sub_categories')->join('categories','categories.id', 'sub_categories.category_id')->get();
+        // return response()->json($data);
+
         $sub_cat = SubCategory::all();
-        return view('admin.subcategory.index', compact('sub_cat'));
+        return view('admin.subcategory.index',compact('sub_cat'));
     }
 
     /**

@@ -45,13 +45,20 @@
                                         @foreach ($sub_cat as $key => $subcat_item)
                                             <tr>
                                                 <td>{{ ++$key }}</td>
-                                                <td>{{ $subcat_item->category_id }}</td>
+                                                <td>{{ $subcat_item->category->category_name }}</td>
                                                 <td>{{ $subcat_item->subcategory_name }}</td>
                                                 <td>{{ $subcat_item->subcategory_slug }}</td>
                                                 <td>
-                                                    <a href="">
-                                                        <i class="fa fa-edit">
-                                                    </a>
+                                                    <a href="" class="btn btn-primary" style="float: left"><i class="fa fa-edit"></i></a>
+                                                    <div>
+                                                        <form action="" method="POST">
+                                                            @csrf
+                                                            <input type="hidden" name="_method" value="DELETE">
+                                                            <button type="submit" class="btn btn-danger show_confirm" data-toggle="tooltip" title="delete">
+                                                                <i class="fa fa-trash"></i>
+                                                            </button>
+                                                        </form>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach
