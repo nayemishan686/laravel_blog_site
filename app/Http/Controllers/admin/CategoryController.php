@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
 
+
 class CategoryController extends Controller
 {
     /**
@@ -113,6 +114,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         DB::table('categories')->where('id',$id)->delete();
-        return redirect()->route('category.index');
+        $notification = array('message' => 'Category Deleted Successfully', 'alert-type' => 'success'); 
+        return redirect()->back()->with($notification);
     }
 }

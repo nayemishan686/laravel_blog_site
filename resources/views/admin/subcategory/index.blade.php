@@ -27,7 +27,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">All Categories Data-Table</h3>
+                                <h3 class="card-title">All SubCategories Data-Table</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -36,27 +36,22 @@
                                         <tr>
                                             <th>SL</th>
                                             <th>Category Name</th>
-                                            <th>Category Slug</th>
+                                            <th>SubCategory Name</th>
+                                            <th>SubCategory Slug</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($ctg_data as $key => $cat_item)
+                                        @foreach ($sub_cat as $key => $subcat_item)
                                             <tr>
                                                 <td>{{ ++$key }}</td>
-                                                <td>{{ $cat_item->category_name }}</td>
-                                                <td>{{ $cat_item->category_slug }}</td>
+                                                <td>{{ $subcat_item->category_id }}</td>
+                                                <td>{{ $subcat_item->subcategory_name }}</td>
+                                                <td>{{ $subcat_item->subcategory_slug }}</td>
                                                 <td>
-                                                    <a href="{{ route('category.edit', $cat_item->id) }}"
-                                                        class="btn btn-primary" style="float: left"><i class="fa fa-edit"></i></a>
-                                                    <div class="forms" style="display: inline;">
-                                                        <form action="{{ route('category.destroy', $cat_item->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            <input type="hidden" name="_method" value="DELETE">
-                                                            <button type="submit" class="btn btn-danger show_confirm" data-toggle="tooltip" title='Delete'><i class="fa fa-trash"></i></button>
-                                                        </form>
-                                                    </div>
+                                                    <a href="">
+                                                        <i class="fa fa-edit">
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -71,8 +66,3 @@
         </section>
     </div>
 @endsection
-
-
-
-
-

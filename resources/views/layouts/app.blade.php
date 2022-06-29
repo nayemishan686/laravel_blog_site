@@ -156,7 +156,6 @@
           .then((willDelete) => {
             if (willDelete) {
               form.submit();
-              swal("Data Deleted Successfully");
             }else{
               swal("Safe Data");
             }

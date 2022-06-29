@@ -24,6 +24,9 @@ Auth::routes();
 // Category CRUD
 Route::resource('category',App\Http\Controllers\admin\CategoryController::class)->middleware(['verified']);;
 
+// SubCategory CRUD
+Route::resource('subcategory',App\Http\Controllers\admin\SubCategoryController::class)->middleware(['verified']);
+
 
 
 
