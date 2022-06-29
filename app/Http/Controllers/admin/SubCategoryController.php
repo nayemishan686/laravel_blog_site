@@ -79,7 +79,9 @@ class SubCategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = category::all();
+        $sub_cat = SubCategory::find($id);
+        return view('admin.subcategory.edit',compact('category','sub_cat'));
     }
 
     /**
@@ -91,7 +93,20 @@ class SubCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $sub_cat = SubCategory::find($id);
+        $validated = $request->validate([
+            'category_id' => 'required',
+            'subcategory_name' => 'required|unique:categories,category_name|max:255',
+        ]);
+
+        $sub_cat->update([
+            'category_id' => $request->category_id,
+            'subcategory_name' => $request->subcategory_name,
+            'subcategory_slug' => Str::of($request->subcategory_name)->slug('-'), 
+        ]);
+
+        $notification = array('message' => 'SubCategory Updated Successfully', 'alert-type' => 'success'); 
+        return redirect()->route('subcategory.index')->with($notification);
     }
 
     /**
@@ -102,6 +117,8 @@ class SubCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        SubCategory::destroy($id);
+        $notification = array('message' => 'SubCategory Deleted Successfully', 'alert-type' => 'success'); 
+        return redirect()->back()->with($notification);
     }
 }
