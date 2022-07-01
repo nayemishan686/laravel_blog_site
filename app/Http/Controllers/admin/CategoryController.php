@@ -20,7 +20,8 @@ class CategoryController extends Controller
     public function index()
     {
         $ctg_data = category::all();
-        return view('admin.category.index',compact('ctg_data'));
+        $ctg_count = $ctg_data->count();
+        return view('admin.category.index',compact('ctg_data','ctg_count'));
     }
 
     /**

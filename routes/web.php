@@ -27,6 +27,9 @@ Route::resource('category',App\Http\Controllers\admin\CategoryController::class)
 // SubCategory CRUD
 Route::resource('subcategory',App\Http\Controllers\admin\SubCategoryController::class)->middleware(['verified']);
 
+//Post CRUD
+Route::resource('post',App\Http\Controllers\admin\PostController::class)->middleware(['verified']);
+
 
 
 
