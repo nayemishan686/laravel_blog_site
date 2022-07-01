@@ -13,20 +13,35 @@
                     <form>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                                <label for="title">Title</label>
+                                <input type="text" class="form-control" name="title" id="title" placeholder="Enter email">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1"
-                                    placeholder="Password">
+                                <label for="category">Select Category</label>
+                                <select name="category" id="category" class="form-control">
+                                    <option value="0" selected disabled>Select One</option>
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputFile">File input</label>
+                                <label for="subcategory">Select SubCategory</label>
+                                <select name="subcategory" id="subcategory" class="form-control">
+                                    <option value="0" selected disabled>Select One</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="post_date">Post Date</label>
+                                <input type="date" class="form-control" name="post_date" id="post_date">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea name="description"  class="form-control" id="description" cols="30" rows="10"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="image">File input</label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="exampleInputFile">
-                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                        <input type="file" class="custom-file-input" name="image" id="image">
+                                        <label class="custom-file-label" for="image">Choose Photo</label>
                                     </div>
                                     <div class="input-group-append">
                                         <span class="input-group-text">Upload</span>
@@ -34,8 +49,8 @@
                                 </div>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                <input type="checkbox" class="form-check-input" name="status" id="status">
+                                <label class="form-check-label" for="status">Publish Now</label>
                             </div>
                         </div>
                         <!-- /.card-body -->
