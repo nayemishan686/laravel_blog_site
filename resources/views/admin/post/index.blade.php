@@ -61,7 +61,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="" class="btn btn-primary" style="float: left"><i class="fa fa-edit"></i></a>
+                                                    <a href="{{route('post.edit',$post_item->id)}}" class="btn btn-primary" style="float: left"><i class="fa fa-edit"></i></a>
                                                     <div>
                                                         <form action="{{route('post.destroy',$post_item->id)}}" method="POST">
                                                             @csrf

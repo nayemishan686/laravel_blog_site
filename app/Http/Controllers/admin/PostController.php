@@ -92,7 +92,10 @@ class PostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        //
+        $category = category::all();
+        $post = Post::find($id);
+        return view('admin.post.edit',compact('category','post'));
+
     }
 
     /**
@@ -103,7 +106,41 @@ class PostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        //
+        $validate = $request->validate([
+            'title'          => 'required',
+            'subcategory_id' => 'required',
+            'post_date'      => 'required',
+            'description'    => 'required',
+            'status'         => 'required',
+        ]);
+        $category               = DB::table('sub_categories')->where('id', $request->subcategory_id)->first()->category_id;
+        $slug                   = Str::of($request->title)->slug('-');
+        $data                   = [];
+        $data['category_id']    = $category;
+        $data['subcategory_id'] = $request->subcategory_id;
+        $data['user_id']        = Auth::id();
+        $data['title']          = $request->title;
+        $data['slug']           = $slug;
+        $data['description']    = $request->description;
+        $data['post_date']      = $request->post_date;
+        $data['status']         = $request->status;
+        $photo                  = $request->image;
+        if ($photo) {
+            if(File::exists($request->old_image)){
+                File::delete($request->old_image);
+            }
+            $photoname = $slug . "." . $photo->getClientOriginalExtension();
+            Image::make($photo)->resize(600, 360)->save('public/media/' . $photoname);
+            $data['image'] = 'public/media/' . $photoname;
+            DB::table('posts')->update($data);
+            $notification = ['message' => 'Post Update Successfully', 'alert-type' => 'success'];
+            return redirect()->back()->with($notification);
+        }else{
+            $data['image'] = $request->old_image;
+            DB::table('posts')->update($data);
+            $notification = ['message' => 'Post Update Successfully', 'alert-type' => 'success'];
+            return redirect()->back()->with($notification);
+        }
     }
 
     /**
