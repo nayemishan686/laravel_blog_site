@@ -22,9 +22,8 @@ return new class extends Migration
             $table->string('slug')->nullable();
             $table->text('description')->nullable();
             $table->string('image')->nullable();
-            $table->text('tags')->nullable();
-            $table->string('status')->nullable();
-            $table->boolean('post_date')->nullable()->default(0);
+            $table->string('post_date')->nullable();
+            $table->boolean('status')->nullable()->default(0);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

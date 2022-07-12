@@ -38,6 +38,8 @@
         href="{{ asset('public/backend') }}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Toastr -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+      <!-- summernote -->
+  <link rel="stylesheet" href="{{ asset('public/backend') }}/plugins/summernote/summernote-bs4.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -120,6 +122,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- Sweetalert -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <!-- Summernote -->
+<script src="{{ asset('public/backend') }}/plugins/summernote/summernote-bs4.min.js"></script>
     <!-- Datatable specific script -->
     <script>
         $(function() {
@@ -181,6 +185,13 @@
             }
         @endif
     </script>
+    {{-- Summenote --}}
+    <script>
+        $(function () {
+          // Summernote
+          $('.summernote').summernote()
+        })
+      </script>
 
 </body>
 
