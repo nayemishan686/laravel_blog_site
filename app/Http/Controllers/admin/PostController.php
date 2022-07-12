@@ -3,32 +3,28 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\DB;
 use App\Models\category;
-use App\Models\SubCategory;
 use App\Models\Post;
+use File;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
-class PostController extends Controller
-{
+class PostController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('auth');
     }
 
-    
-    public function index()
-    {   
+    public function index() {
         $post = Post::all();
-        return view('admin.post.index',compact('post'));
+        return view('admin.post.index', compact('post'));
     }
 
     /**
@@ -36,10 +32,9 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {   
+    public function create() {
         $category = category::all();
-        return view('admin.post.create',compact('category'));
+        return view('admin.post.create', compact('category'));
     }
 
     /**
@@ -48,34 +43,33 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $validate=$request->validate([
-            'title' => 'required',
+    public function store(Request $request) {
+        $validate = $request->validate([
+            'title'          => 'required',
             'subcategory_id' => 'required',
-            'post_date' => 'required',
-            'description' => 'required',
-            'image' => 'required',
-            'status' => 'required',
+            'post_date'      => 'required',
+            'description'    => 'required',
+            'image'          => 'required',
+            'status'         => 'required',
         ]);
-        $category=DB::table('sub_categories')->where('id',$request->subcategory_id)->first()->category_id;
-        $slug = Str::of($request->title)->slug('-');
-        $data = array();
-        $data['category_id'] = $category;
+        $category               = DB::table('sub_categories')->where('id', $request->subcategory_id)->first()->category_id;
+        $slug                   = Str::of($request->title)->slug('-');
+        $data                   = [];
+        $data['category_id']    = $category;
         $data['subcategory_id'] = $request->subcategory_id;
-        $data['user_id'] = Auth::id();
-        $data['title'] = $request->title;
-        $data['slug'] = $slug;
-        $data['description'] = $request->description;
-        $data['post_date'] = $request->post_date;
-        $data['status'] = $request->status;
-        $photo = $request->image;
-        if($photo){
-            $photoname = $slug. "." .$photo->getClientOriginalExtension();
-            Image::make($photo)->resize(600,360)->save('public/media/'.$photoname);
-            $data['image'] = 'public/media/'.$photoname;
+        $data['user_id']        = Auth::id();
+        $data['title']          = $request->title;
+        $data['slug']           = $slug;
+        $data['description']    = $request->description;
+        $data['post_date']      = $request->post_date;
+        $data['status']         = $request->status;
+        $photo                  = $request->image;
+        if ($photo) {
+            $photoname = $slug . "." . $photo->getClientOriginalExtension();
+            Image::make($photo)->resize(600, 360)->save('public/media/' . $photoname);
+            $data['image'] = 'public/media/' . $photoname;
             DB::table('posts')->insert($data);
-            $notification = array('message' => 'Post Created Successfully', 'alert-type' => 'success'); 
+            $notification = ['message' => 'Post Created Successfully', 'alert-type' => 'success'];
             return redirect()->back()->with($notification);
         }
 
@@ -87,8 +81,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -98,8 +91,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -110,8 +102,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -121,8 +112,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id) {
+        $post = Post::find($id);
+        if (File::exists($post->image)) {
+            File::delete($post->image);
+        }
+        $post::destroy($id);
+        $notification = ['message' => 'Post Deleted Successfully', 'alert-type' => 'success'];
+        return redirect()->back()->with($notification);
     }
 }

@@ -63,7 +63,7 @@
                                                 <td>
                                                     <a href="" class="btn btn-primary" style="float: left"><i class="fa fa-edit"></i></a>
                                                     <div>
-                                                        <form action="" method="POST">
+                                                        <form action="{{route('post.destroy',$post_item->id)}}" method="POST">
                                                             @csrf
                                                             <input type="hidden" name="_method" value="DELETE">
                                                             <button type="submit" class="btn btn-danger show_confirm" data-toggle="tooltip" title="delete">
