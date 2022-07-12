@@ -74,7 +74,7 @@
                                 @enderror
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input @error ('status') is_invalid @enderror" name="status" id="status">
+                                <input type="checkbox" class="form-check-input @error ('status') is_invalid @enderror" name="status" id="status" value="1">
                                 <label class="form-check-label" for="status">Publish Now</label>
                                 @error('status')
                                     <div class="text text-danger">{{ $message }}</div>

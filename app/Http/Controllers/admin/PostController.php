@@ -26,8 +26,9 @@ class PostController extends Controller
 
     
     public function index()
-    {
-        //
+    {   
+        $post = Post::all();
+        return view('admin.post.index',compact('post'));
     }
 
     /**
@@ -67,10 +68,11 @@ class PostController extends Controller
         $data['slug'] = $slug;
         $data['description'] = $request->description;
         $data['post_date'] = $request->post_date;
+        $data['status'] = $request->status;
         $photo = $request->image;
         if($photo){
             $photoname = $slug. "." .$photo->getClientOriginalExtension();
-            Image::make($photo)->resize(600,500)->save('public/media/'.$photoname);
+            Image::make($photo)->resize(600,360)->save('public/media/'.$photoname);
             $data['image'] = 'public/media/'.$photoname;
             DB::table('posts')->insert($data);
             $notification = array('message' => 'Post Created Successfully', 'alert-type' => 'success'); 
